@@ -9,6 +9,7 @@
 class Enemy : public Tank{
 public:
     Enemy();
+    void shoot();
 private:
 
 };

@@ -7,3 +7,7 @@
 Enemy::Enemy(){
     setEntitySymbol('e');
 }
+
+void Enemy::shoot() {
+
+}

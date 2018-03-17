@@ -9,6 +9,8 @@ World::World(int size_X, int size_Y, Player *p, vector<Enemy*> enemies, vector<W
     for (int i = 0; i < m_sizeX; i++) {
         m_map[i] = new char[m_sizeY];
     }
+    m_tanks.push_back(p);
+    m_tanks.insert(m_tanks.end(), enemies.begin(), enemies.end());
     drawEntity(p);
     for (auto enemy: enemies){
         drawEntity(enemy);
@@ -30,4 +32,12 @@ void World::drawEntity(Entity *e) {
 
 char World::checkPos(int x, int y) {
     return m_map[x][y];
+}
+
+Tank* World::getTankByPos(int x, int y) {
+    for(std::vector<Tank*>::const_iterator it = m_tanks.begin(); it != m_tanks.end(); ++it){
+        if((*it)->getX() == x && (*it)->getY() == y){
+            return *it;
+        }
+    }
 }

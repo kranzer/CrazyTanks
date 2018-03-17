@@ -5,6 +5,7 @@
 #include "Enemy.h"
 #include "Entity.h"
 #include "Wall.h"
+#include "Tank.h"
 #include <vector>
 using namespace std;
 #ifndef CRAZYTANKS_WORLD_H
@@ -17,12 +18,13 @@ public:
     ~World();
     void drawEntity(Entity*);
     char checkPos(int, int);
-    Entity* getEntityByPos(int, int);
+    Tank* getTankByPos(int, int);
 
 private:
     char **m_map;
     int m_sizeX;
     int m_sizeY;
+    vector<Tank*> m_tanks;
 };
 
 

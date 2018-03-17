@@ -8,6 +8,7 @@
 
 class Tank : public Entity {
 public:
+    Tank(){};
     virtual void shoot() = 0;
     void moveUp();
     void moveDown();

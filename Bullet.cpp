@@ -33,7 +33,7 @@ bool Bullet::persuadeDirection(char aim) {
     while (true) {
         char entity = m_world->checkPos(this->getX()+m_incX, this->getY()+m_incY);
         if(entity == aim){
-            m_world->getEntityByPos(this->getX(),this->getY());
+            m_world->getTankByPos(this->getX(),this->getY());
             return true;
         } else if(entity == 'w') {
             return false;
