@@ -9,6 +9,7 @@
 
 class Wall : public Entity{
 public:
+    char getEntitySymbol();
 };
 
 

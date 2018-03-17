@@ -7,7 +7,13 @@
 
 
 class Player : public Tank{
+public:
+    Player();
+    void setLives(int);
+    int getLives();
 
+private:
+    int m_lives = 3;
 };
 
 

@@ -3,3 +3,7 @@
 //
 
 #include "Tank.h"
+
+char Tank::getDirection() {
+    return m_direction;
+}

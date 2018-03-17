@@ -3,3 +3,7 @@
 //
 
 #include "Wall.h"
+
+char Wall::getEntitySymbol() {
+    return 'w';
+}

@@ -7,6 +7,9 @@
 
 
 class Enemy : public Tank{
+public:
+    Enemy();
+private:
 
 };
 

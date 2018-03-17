@@ -7,6 +7,15 @@
 
 
 class Tank : public Entity {
+public:
+    virtual void shoot() = 0;
+    void moveUp();
+    void moveDown();
+    void moveRight();
+    void moveLeft();
+    char getDirection();
+private:
+    char m_direction;
 
 };
 
