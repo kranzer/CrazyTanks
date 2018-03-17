@@ -15,6 +15,7 @@ public:
     void moveRight();
     void moveLeft();
     char getDirection();
+    void setDirection(char);
 private:
     char m_direction;
 

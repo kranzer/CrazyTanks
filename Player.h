@@ -9,6 +9,7 @@
 class Player : public Tank{
 public:
     Player();
+    void shoot() override;
     void setLives(int);
     int getLives();
 

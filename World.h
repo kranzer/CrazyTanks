@@ -19,6 +19,7 @@ public:
     void drawEntity(Entity*);
     char checkPos(int, int);
     Tank* getTankByPos(int, int);
+    void killTank(Tank*);
 
 private:
     char **m_map;
