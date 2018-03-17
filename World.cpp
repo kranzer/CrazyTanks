@@ -22,15 +22,26 @@ World::~World() {
     delete [] m_map;
 }
 
-void World::drawEntity(Entity *e) {
-    int _x = e->getX();
-    int _y = e->getY();
+void World::drawEntity(Tank *t) {
+    int _x = t->getX();
+    int _y = t->getY();
 
-    m_map[_x][_y] = e->getEntitySymbol();
+    m_map[_x][_y] = t->getEntitySymbol();
+}
+
+void World::drawEntity(const vector<vector<Wall*>>& walls){
+    for(auto const& wall_vec: walls){
+        for(auto const& wall: wall_vec){
+            int _x = wall->getX();
+            int _y = wall->getY();
+
+            m_map[_x][_y] = wall->getEntitySymbol();
+        }
+    }
 }
 
 void World::killTank(Tank *t) {
-    std::vector<Tank*>::iterator toBeKilled;
+    vector<Tank*>::iterator toBeKilled;
     toBeKilled = find(m_tanks.begin(), m_tanks.end(), t);
 
     if (toBeKilled!=m_tanks.end())

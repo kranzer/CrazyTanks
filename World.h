@@ -16,7 +16,8 @@ class World {
 public:
     World(int, int, Player*, vector<Enemy*>, vector<Wall*>);
     ~World();
-    void drawEntity(Entity*);
+    void drawEntity(Tank*);
+    void drawEntity(const vector<vector<Wall*>>&);
     char checkPos(int, int);
     Tank* getTankByPos(int, int);
     void killTank(Tank*);
