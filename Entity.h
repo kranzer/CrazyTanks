@@ -9,6 +9,7 @@
 class Entity {
 public:
     Entity(int, int, int, int);
+    Entity();
 private:
     int m_X;
     int m_Y;
