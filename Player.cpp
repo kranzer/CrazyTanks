@@ -4,8 +4,10 @@
 
 #include "Player.h"
 
-Player::Player() {
+Player::Player(int x, int y) {
     setEntitySymbol('p');
+    setX(x);
+    setY(y);
 }
 
 void Player::setLives(int lives) {

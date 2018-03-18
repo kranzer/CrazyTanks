@@ -10,7 +10,7 @@ using namespace std;
 
 class Wall : public Entity{
 public:
-    Wall();
+    Wall(int, int);
 private:
 
 };

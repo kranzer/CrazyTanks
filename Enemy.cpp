@@ -4,8 +4,10 @@
 
 #include "Enemy.h"
 
-Enemy::Enemy(){
+Enemy::Enemy(int x, int y){
     setEntitySymbol('e');
+    setX(x);
+    setY(y);
 }
 
 void Enemy::shoot() {

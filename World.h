@@ -14,10 +14,12 @@ using namespace std;
 
 class World {
 public:
-    World(int, int, Player*, vector<Enemy*>, vector<Wall*>);
+    World(int, int);
     ~World();
-    void drawEntity(Tank*);
-    void drawEntity(const vector<vector<Wall*>>&);
+    void drawEntities(const vector<Wall*>&);
+    void drawEntities(const vector<Tank*>&);
+    vector<Wall*> wallGenerator();
+    void show();
     char checkPos(int, int);
     Tank* getTankByPos(int, int);
     void killTank(Tank*);
@@ -26,6 +28,7 @@ private:
     char **m_map;
     int m_sizeX;
     int m_sizeY;
+    vector<Wall*> m_walls;
     vector<Tank*> m_tanks;
 };
 

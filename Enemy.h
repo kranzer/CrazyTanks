@@ -8,7 +8,7 @@
 
 class Enemy : public Tank{
 public:
-    Enemy();
+    Enemy(int, int);
     void shoot() override;
 private:
 

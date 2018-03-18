@@ -8,7 +8,7 @@
 
 class Entity {
 public:
-    Entity(int, int, int, int);
+    Entity(int, int);
     Entity();
     void setX(int);
     void setY(int);
@@ -19,8 +19,6 @@ public:
 private:
     int m_X;
     int m_Y;
-    int m_length;
-    int m_height;
     char m_symbol;
 
 };

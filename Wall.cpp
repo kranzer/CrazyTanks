@@ -4,6 +4,8 @@
 
 #include "Wall.h"
 
-Wall::Wall(){
-
+Wall::Wall(int x, int y){
+    setX(x);
+    setY(y);
+    setEntitySymbol('w');
 }

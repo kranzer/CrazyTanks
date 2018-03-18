@@ -3,3 +3,8 @@
 //
 
 #include "Game.h"
+
+Game::Game() {
+    m_world = new World(15, 15);
+    m_world->show();
+}
