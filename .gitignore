@@ -5,8 +5,9 @@ Debug/
 CMakeFiles/
 CrazyTanks.dir/
 Win32/
-*.vsproj	
-*.vsproj.user
-*.vsproj.filters
+*.vcxproj	
+*.vcxproj.user
+*.vcxproj.filters
 *.sln
 *.cmake
+*.user
