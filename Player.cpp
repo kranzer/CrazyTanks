@@ -18,6 +18,4 @@ int Player::getLives() {
     return m_lives;
 }
 
-void Player::shoot() {
 
-}

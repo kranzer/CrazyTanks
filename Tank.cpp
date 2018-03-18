@@ -8,26 +8,26 @@ char Tank::getDirection() {
     return m_direction;
 }
 
-void Tank::setDirection(char direction) {
-    m_direction = direction;
-}
-
 void Tank::moveUp() {
     setX(getX());
     setY(getY() - 1);
+	m_direction = 'u';
 }
 
 void Tank::moveDown() {
     setX(getX());
-    setY(getY() +1);
+    setY(getY() + 1);
+	m_direction = 'd';
 }
 
 void Tank::moveRight() {
     setX(getX() + 1);
     setY(getY());
+	m_direction = 'r';
 }
 
 void Tank::moveLeft() {
     setX(getX() - 1);
     setY(getY());
+	m_direction = 'l';
 }

@@ -19,13 +19,19 @@ public:
     ~World();
     void drawEntities(const vector<Wall*>&);
     void drawEntities(const vector<Tank*>&);
-    void worldCycle();
+	void drawEntity(Entity*);
     vector<Wall*> wallGenerator();
     void show();
     char checkPos(int, int);
     Tank* getTankByPos(int, int);
     void clearScreen();
+	void safeMoveUp(Tank*);
+	void safeMoveDown(Tank*);
+	void safeMoveRight(Tank*);
+	void safeMoveLeft(Tank*);
 	void clearCell(int, int);
+	Player* getPlayer();
+	vector<Tank*> getTanks();
     void killTank(Tank*);
 
 private:

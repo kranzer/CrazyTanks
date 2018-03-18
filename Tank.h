@@ -2,21 +2,20 @@
 // Created by danik on 17.03.2018.
 //
 #include "Entity.h"
+
 #ifndef CRAZYTANKS_TANK_H
 #define CRAZYTANKS_TANK_H
 
 
 class Tank : public Entity {
 public:
-    virtual void shoot() = 0;
     void moveUp();
     void moveDown();
     void moveRight();
     void moveLeft();
     char getDirection();
-    void setDirection(char);
 private:
-    char m_direction;
+    char m_direction = 'u';
 };
 
 

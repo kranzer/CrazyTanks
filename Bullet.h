@@ -12,11 +12,12 @@
 class Bullet : public Entity{
 private:
     const int velocity = 3;
-    int m_incX;
-    int m_incY;
+    int m_incX = 0;
+    int m_incY = 0;
     World *m_world;
 public:
     Bullet(Tank *, World *);
+	~Bullet();
     bool persuadeDirection(char);
 };
 

@@ -10,6 +10,3 @@ Enemy::Enemy(int x, int y) {
     setY(y);
 }
 
-void Enemy::shoot() {
-
-}

@@ -5,11 +5,7 @@
 #include "World.h"
 #include <iostream>
 #include <conio.h>
-
-#define KEY_UP 72
-#define KEY_DOWN 80
-#define KEY_LEFT 75
-#define KEY_RIGHT 77
+#include <thread>
 
 using namespace std;
 
@@ -27,6 +23,13 @@ World::World(int size_X, int size_Y): m_sizeX(size_X), m_sizeY(size_Y) {
     m_tanks.push_back(m_p);
     drawEntities(m_walls);
 
+}
+
+void World::drawEntity(Entity *e) {
+	int _x = e->getX();
+	int _y = e->getY();
+
+	m_map[_y][_x] = e->getEntitySymbol();
 }
 
 vector<Wall*> World::wallGenerator() {
@@ -54,6 +57,9 @@ vector<Wall*> World::wallGenerator() {
     return walls;
 }
 
+vector<Tank*> World::getTanks() {
+	return m_tanks;
+}
 
 void World::show() {
     clearScreen();
@@ -90,30 +96,29 @@ void World::drawEntities(const vector<Tank*>& tanks) {
     }
 }
 
-void World::worldCycle() {
-    int c = 0;
-    while (true) {
-        switch((c=getch())) {
-            case KEY_UP:
-				clearCell(m_p->getX(), m_p->getY());
-                m_p->moveUp();
-                break;
-            case KEY_DOWN:
-				clearCell(m_p->getX(), m_p->getY());
-                m_p->moveDown();
-                break;
-            case KEY_LEFT:
-				clearCell(m_p->getX(), m_p->getY());
-                m_p->moveLeft();
-                break;
-            case KEY_RIGHT:
-				clearCell(m_p->getX(), m_p->getY());
-                m_p->moveRight();
-                break;
-        }
-
-        show();
-    }
+void World::safeMoveUp(Tank *t) {
+	if (checkPos(t->getX(), t->getY() - 1) != 'w') {
+		clearCell(t->getX(), t->getY());
+		t->moveUp();
+	}
+}
+void World::safeMoveDown(Tank *t) {
+	if (checkPos(t->getX(), t->getY() + 1) != 'w') {
+		clearCell(t->getX(), t->getY());
+		t->moveDown();
+	}
+}
+void World::safeMoveRight(Tank *t) {
+	if (checkPos(t->getX() + 1, t->getY()) != 'w') {
+		clearCell(t->getX(), t->getY());
+		t->moveRight();
+	}
+}
+void World::safeMoveLeft(Tank *t) {
+	if (checkPos(t->getX() - 1, t->getY()) != 'w') {
+		clearCell(t->getX(), t->getY());
+		t->moveLeft();
+	}
 }
 
 void World::clearCell(int x, int y) {
@@ -121,29 +126,36 @@ void World::clearCell(int x, int y) {
 }
 
 void World::clearScreen() {
-    HANDLE hOut;
-    COORD Position;
+	CONSOLE_SCREEN_BUFFER_INFO	csbiInfo;
+	HANDLE	hConsoleOut;
+	COORD	Home = { 0,0 };
+	DWORD	dummy;
 
-    hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	hConsoleOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	GetConsoleScreenBufferInfo(hConsoleOut, &csbiInfo);
 
-    Position.X = 0;
-    Position.Y = 0;
-    SetConsoleCursorPosition(hOut, Position);
+	FillConsoleOutputCharacter(hConsoleOut, ' ', csbiInfo.dwSize.X * csbiInfo.dwSize.Y, Home, &dummy);
+	csbiInfo.dwCursorPosition.X = 0;
+	csbiInfo.dwCursorPosition.Y = 0;
+	SetConsoleCursorPosition(hConsoleOut, csbiInfo.dwCursorPosition);
 }
+
 void World::killTank(Tank *t) {
     vector<Tank*>::iterator toBeKilled;
     toBeKilled = find(m_tanks.begin(), m_tanks.end(), t);
 
     if (toBeKilled!=m_tanks.end())
     {
-        m_map[(*toBeKilled)->getX()][(*toBeKilled)->getY()] = ' ';
-        delete *toBeKilled;
-        m_tanks.erase(toBeKilled);
+		m_map[(*toBeKilled)->getY()][(*toBeKilled)->getX()] = ' ';
+ 		delete *toBeKilled;
+		m_tanks.erase(toBeKilled);
+
+		
     }
 }
 
 char World::checkPos(int x, int y) {
-    return m_map[x][y];
+    return m_map[y][x];
 }
 
 Tank* World::getTankByPos(int x, int y) {
@@ -152,4 +164,8 @@ Tank* World::getTankByPos(int x, int y) {
             return *it;
         }
     }
+}
+
+Player* World::getPlayer() {
+	return m_p;
 }

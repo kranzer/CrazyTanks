@@ -5,6 +5,7 @@
 #include "Bullet.h"
 
 Bullet::Bullet(Tank *t, World *w) : m_world(w) {
+	setEntitySymbol('b');
     switch (t->getDirection()){
         case 'u':
             setX(t->getX());
@@ -33,20 +34,31 @@ Bullet::Bullet(Tank *t, World *w) : m_world(w) {
         default:
             break;
     }
+	m_world->drawEntity(this);
+}
+
+Bullet::~Bullet() {
+	m_world->clearCell(getX(), getY());
 }
 
 bool Bullet::persuadeDirection(char aim) {
     while (true) {
         char entity = m_world->checkPos(getX()+m_incX, getY()+m_incY);
+		m_world->drawEntity(this);
+		Sleep(500);
         if(entity == aim){
-            m_world->killTank(m_world->getTankByPos(getX(),getY()));
-            return true;
+            m_world->killTank(m_world->getTankByPos(getX()+m_incX,getY()+m_incY));
+			delete this;
+			return true;
         } else if(entity == 'w') {
-            return false;
+			delete this;
+			return false;
         }
         else {
+			m_world->clearCell(getX(), getY());
             setX(getX() + m_incX);
             setY(getY() + m_incY);
+			
         }
     }
 }

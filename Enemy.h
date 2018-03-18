@@ -9,7 +9,6 @@
 class Enemy : public Tank{
 public:
     Enemy(int, int);
-    void shoot() override;
 private:
 };
 
