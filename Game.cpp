@@ -5,6 +5,7 @@
 #include "Game.h"
 
 Game::Game() {
-    m_world = new World(15, 15);
+    m_world = new World(20, 20);
     m_world->show();
+    m_world->worldCycle();
 }

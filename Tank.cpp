@@ -19,7 +19,7 @@ void Tank::moveUp() {
 
 void Tank::moveDown() {
     setX(getX());
-    setY(getY() - 1);
+    setY(getY() +1);
 }
 
 void Tank::moveRight() {

@@ -4,6 +4,13 @@
 #include <algorithm>
 #include "World.h"
 #include <iostream>
+#include <conio.h>
+
+#define KEY_UP 72
+#define KEY_DOWN 80
+#define KEY_LEFT 75
+#define KEY_RIGHT 77
+
 using namespace std;
 
 World::World(int size_X, int size_Y): m_sizeX(size_X), m_sizeY(size_Y) {
@@ -14,10 +21,11 @@ World::World(int size_X, int size_Y): m_sizeX(size_X), m_sizeY(size_Y) {
             m_map[i][j] = ' ';
         }
     }
+    m_p = new Player(8,8);
     m_walls = wallGenerator();
-    m_tanks = {new Enemy(3,3), new Enemy(4,5), new Player(8,8)};
+    m_tanks = {new Enemy(3,3), new Enemy(4,5), };
+    m_tanks.push_back(m_p);
     drawEntities(m_walls);
-    drawEntities(m_tanks);
 
 }
 
@@ -46,9 +54,12 @@ vector<Wall*> World::wallGenerator() {
     return walls;
 }
 
+
 void World::show() {
-    for (int i = 0; i < m_sizeX; i++){
-        for (int j = 0; j < m_sizeY; j++){
+    clearScreen();
+    drawEntities(m_tanks);
+    for (int i = 0; i < m_sizeY; i++){
+        for (int j = 0; j < m_sizeX; j++){
             cout << m_map[i][j];
         }
         cout << endl;
@@ -66,7 +77,7 @@ void World::drawEntities(const vector<Wall*>& walls) {
         int _x = w->getX();
         int _y = w->getY();
 
-        m_map[_x][_y] = w->getEntitySymbol();
+        m_map[_y][_x] = w->getEntitySymbol();
     }
 }
 
@@ -75,12 +86,50 @@ void World::drawEntities(const vector<Tank*>& tanks) {
         int _x = t->getX();
         int _y = t->getY();
 
-        m_map[_x][_y] = t->getEntitySymbol();
+        m_map[_y][_x] = t->getEntitySymbol();
     }
 }
 
+void World::worldCycle() {
+    int c = 0;
+    while (true) {
+        switch((c=getch())) {
+            case KEY_UP:
+				clearCell(m_p->getX(), m_p->getY());
+                m_p->moveUp();
+                break;
+            case KEY_DOWN:
+				clearCell(m_p->getX(), m_p->getY());
+                m_p->moveDown();
+                break;
+            case KEY_LEFT:
+				clearCell(m_p->getX(), m_p->getY());
+                m_p->moveLeft();
+                break;
+            case KEY_RIGHT:
+				clearCell(m_p->getX(), m_p->getY());
+                m_p->moveRight();
+                break;
+        }
 
+        show();
+    }
+}
 
+void World::clearCell(int x, int y) {
+    m_map[y][x] = ' ';
+}
+
+void World::clearScreen() {
+    HANDLE hOut;
+    COORD Position;
+
+    hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    Position.X = 0;
+    Position.Y = 0;
+    SetConsoleCursorPosition(hOut, Position);
+}
 void World::killTank(Tank *t) {
     vector<Tank*>::iterator toBeKilled;
     toBeKilled = find(m_tanks.begin(), m_tanks.end(), t);

@@ -1,2 +1,12 @@
 .idea/
 cmake-build-debug/
+.vs/
+Debug/
+CMakeFiles/
+CrazyTanks.dir/
+Win32/
+*.vsproj	
+*.vsproj.user
+*.vsproj.filters
+*.sln
+*.cmake

@@ -11,7 +11,6 @@ public:
     Enemy(int, int);
     void shoot() override;
 private:
-
 };
 
 

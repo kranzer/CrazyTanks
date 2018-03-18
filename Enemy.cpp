@@ -4,7 +4,7 @@
 
 #include "Enemy.h"
 
-Enemy::Enemy(int x, int y){
+Enemy::Enemy(int x, int y) {
     setEntitySymbol('e');
     setX(x);
     setY(y);
